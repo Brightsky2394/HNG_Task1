@@ -24,7 +24,7 @@ app.get('/api/hello', async (req, res) => {
 });
 
 async function getTemperature(city) {
-  const apiKey = "220261e21d6d3a49906e01c2d231ddc2";
+  const apiKey = process.env.API_KEY;
   const weatherResponse = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
   return weatherResponse.data.main.temp;
 }
