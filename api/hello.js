@@ -1,26 +1,15 @@
-import express from 'express';
 import fetch from 'node-fetch';
 
-const app = express();
+export default async function handler(req, res) {
+  const { visitor_name } = req.query;
 
-app.get('/api/hello', async (req, res) => {
-  const visitor_name = req.query.visitor_name;
-
-  // Get the client's IP address
   const client_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-
-  // For demonstration purposes, we'll use a static location and temperature
-  const location = 'New York';
-  const temperature = 11; // Static temperature value
-
-  // Construct the greeting message
-  const greeting = `Hello, ${visitor_name}!, the temperature is ${temperature} degrees Celsius in ${location}`;
+  const location = 'New York'; // You should use an API to determine the actual location based on IP
+  const temperature = 11; // This should be fetched from a weather API
 
   res.status(200).json({
     client_ip,
     location,
-    greeting,
+    greeting: `Hello, ${visitor_name}!, the temperature is ${temperature} degrees Celsius in ${location}`
   });
-});
-
-export default app;
+}
