@@ -10,7 +10,7 @@ app.get('/api/hello', async (req, res) => {
   const client_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
   // static location and temperature
-  const location = 'New York';
+  const location = 'Lagos';
   const temperature = 11; // Static temperature value
 
   // greeting message
