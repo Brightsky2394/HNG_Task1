@@ -1,5 +1,8 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
@@ -21,7 +24,7 @@ app.get('/api/hello', async (req, res) => {
     // Fetch weather information based on location
     const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`);
     const weatherData = await weatherResponse.json();
-    const temperature = 11;
+    const temperature = weatherData.main.temp;
 
     // Greeting message
     const greeting = `Hello, ${visitor_name}!, the temperature is ${temperature} degrees Celsius in ${location}`;
